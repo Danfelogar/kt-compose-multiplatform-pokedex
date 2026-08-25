@@ -7,6 +7,9 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
 //    custom
+    alias(libs.plugins.ksp) apply false
 //    kotlin-serialization
     alias(libs.plugins.kotlinSerialization) apply false
+//    room
+    alias(libs.plugins.androidx.room3) apply false
 }

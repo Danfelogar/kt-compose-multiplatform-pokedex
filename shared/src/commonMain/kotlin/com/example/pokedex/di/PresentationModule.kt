@@ -18,11 +18,20 @@ val presentationModule = module {
     single { Navigator(startDestination = PokemonListRoute) }
 
     viewModel { PokemonListViewModel(get()) }
-    viewModel { params -> PokemonDetailViewModel(pokemonId = params.get()) }
+    viewModel { params ->
+        PokemonDetailViewModel(
+            pokemonId = params.get(),
+            getPokemonDetail = get(),
+            observeFavoriteIds = get(),
+            toggleFavorite = get()
+        )
+    }
 
     navigation<PokemonListRoute> {
         val navigator = get<Navigator>()
-        PokemonListScreen( onPokemonClick =  { id -> navigator.goTo(PokemonDetailRoute(id)) } )
+        PokemonListScreen(
+            onPokemonClick = { id -> navigator.goTo(PokemonDetailRoute(id)) }
+        )
     }
 
     navigation<PokemonDetailRoute> { route ->
