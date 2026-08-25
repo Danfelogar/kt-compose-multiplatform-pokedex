@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -57,6 +59,7 @@ fun PokemonListScreen(
                 else -> PokemonList(
                     items = state.items,
                     isLoadingMore = state.isLoadingMore,
+                    loadMoreError = state.error,
                     onLoadMore = viewModel::loadNextPage,
                     onPokemonClick = onPokemonClick
                 )
@@ -69,6 +72,7 @@ fun PokemonListScreen(
 private fun PokemonList(
     items: List<PokemonSummary>,
     isLoadingMore: Boolean,
+    loadMoreError: String?,
     onLoadMore: () -> Unit,
     onPokemonClick: (Int) -> Unit
 ) {
@@ -93,10 +97,21 @@ private fun PokemonList(
         itemsIndexed(items, key = { _, item -> item.id }) { _, item ->
             PokemonListItem(item = item, onClick = { onPokemonClick(item.id) })
         }
-        if (isLoadingMore) {
-            item {
-                Box(modifier = Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
+        when {
+            isLoadingMore -> item(key = "loading_more") {
+                Box(Modifier.fillMaxWidth().padding(16.dp), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
+                }
+            }
+            loadMoreError != null -> item(key = "load_more_error") {
+                Row(
+                    modifier = Modifier.fillMaxWidth().padding(16.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Could not load any more", style = MaterialTheme.typography.bodySmall)
+                    Spacer(Modifier.width(8.dp))
+                    Button(onClick = onLoadMore) { Text("Re-try") }
                 }
             }
         }
