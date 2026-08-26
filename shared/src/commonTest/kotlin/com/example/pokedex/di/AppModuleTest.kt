@@ -9,7 +9,7 @@ class AppModuleTest {
     fun tearDown() = stopKoin()
 
     @Test
-    fun `koin starts without errors`() {
+    fun koinStartsWithoutErrors() {
         initKoin()
     }
 }

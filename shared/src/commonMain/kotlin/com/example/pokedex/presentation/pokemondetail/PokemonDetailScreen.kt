@@ -57,7 +57,7 @@ fun PokemonDetailScreen(
                         IconButton(onClick = viewModel::onFavoriteClick) {
                             Icon(
                                 imageVector = if (state.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
-                                contentDescription = "Favorito"
+                                contentDescription = if (state.isFavorite) "Quitar de favoritos" else "Marcar como favorito"
                             )
                         }
                     }

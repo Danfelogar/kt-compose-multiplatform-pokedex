@@ -26,12 +26,12 @@ kotlin {
             linkerOpts.add("SystemConfiguration")
         }
     }
-    
+
     android {
        namespace = "com.example.pokedex.shared"
        compileSdk = libs.versions.android.compileSdk.get().toInt()
        minSdk = libs.versions.android.minSdk.get().toInt()
-    
+
        compilerOptions {
            jvmTarget = JvmTarget.JVM_11
        }
@@ -47,7 +47,7 @@ kotlin {
            instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
        }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
@@ -92,6 +92,16 @@ kotlin {
 //            custom
             implementation(project.dependencies.platform(libs.koin.bom))
             implementation(libs.koin.test)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.turbine)
+        }
+
+        getByName("androidDeviceTest") {
+            dependencies {
+                implementation(libs.androidx.test.runner)
+                implementation(libs.androidx.test.core)
+                implementation(libs.androidx.testExt.junit)
+            }
         }
     }
 }
