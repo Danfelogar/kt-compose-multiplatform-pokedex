@@ -1,0 +1,16 @@
+appId: com.example.pokedex
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Bulbasaur"
+- tapOn: "Bulbasaur"
+- assertVisible: "Estadísticas base"
+- assertVisible:
+    text: "Marcar como favorito"
+- tapOn:
+    text: "Marcar como favorito"
+- assertVisible:
+    text: "Quitar de favoritos"
+- tapOn:
+    text: "Volver"
+- assertVisible: "Bulbasaur"

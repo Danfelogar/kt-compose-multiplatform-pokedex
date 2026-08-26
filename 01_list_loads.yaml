@@ -1,0 +1,6 @@
+appId: com.example.pokedex
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Pokédex"
+- assertVisible: "Bulbasaur"

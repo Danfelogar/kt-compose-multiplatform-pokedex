@@ -1,0 +1,10 @@
+appId: com.example.pokedex
+---
+- launchApp:
+    clearState: true
+- assertVisible: "Bulbasaur"
+- scrollUntilVisible:
+    element:
+        text: "Ninetales"
+    direction: DOWN
+- assertVisible: "Ninetales"
