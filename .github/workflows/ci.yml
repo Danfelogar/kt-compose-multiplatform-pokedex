@@ -25,7 +25,7 @@ jobs:
 
       - name: Upload test report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: unit-test-report
           path: shared/build/reports/tests/testDebugUnitTest/
@@ -49,7 +49,7 @@ jobs:
         run: ./gradlew :androidApp:assembleDebug
 
       - name: Upload APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: app-debug-apk
           path: androidApp/build/outputs/apk/debug/*.apk
@@ -90,7 +90,7 @@ jobs:
 
       - name: Upload Maestro report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: maestro-report
           path: maestro-report.xml
